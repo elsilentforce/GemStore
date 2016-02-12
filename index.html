@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="store">
+<head>
+	<title>Probando el desarrollo con Angular</title>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
+	<script type="text/javascript" src="assets/javascript/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/angular.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/app.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Gemas en Venta</h1>
+		<div class="well" ng-controller="StoreController as store">
+			<div ng-repeat="product in store.products">
+				<h2>
+					{{ product.name }}
+					<em class="pull-right">{{ product.price | currency}}</em>
+				</h2>
+				<!-- Galería -->
+				<img ng-src="{{product.images[0]}}">
+				<!-- Panel -->
+				<section ng-controller="PanelController as panel">
+					<ul class="nav nav-pills">
+						<li ng-class="{active:panel.isSelected(1)}">
+							<a href ng-click="panel.selectTab(1)">Descripción</a>
+						</li>
+						<li ng-class="{active:panel.isSelected(2)}">
+							<a href ng-click="panel.selectTab(2)">Especificaciones</a>
+						</li>
+						<li ng-class="{active:panel.isSelected(3)}">
+							<a href ng-click="panel.selectTab(3)">Opiniones</a>
+						</li>
+					</ul>
+
+					<div class="panel" ng-show="panel.isSelected(1)">
+						<h4>Descripción</h4>
+						<blockquote>{{product.description}}</blockquote>
+					</div>
+					<div class="panel" ng-show="panel.isSelected(2)">
+						<h4>Especificaciones</h4>
+						<blockquote>Sin especificaciones</blockquote>
+					</div>
+					<div class="panel" ng-show="panel.isSelected(3)">
+						<h4>Opiniones</h4>
+						<div ng-repeat="review in product.reviews">
+							<p>
+								<b>Estrellas:{{ review.stars }}</b>
+								{{ review.body }}<br/>
+								-{{ review.author }}
+							</p>
+							
+						</div>
+
+						<!-- Formulario de Opiniones -->
+						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+
+							<select ng-model="reviewCtrl.review.stars">
+								<option value="1">1 Estrella</option>
+								<option value="2">2 Estrellas</option>
+								<option value="3">3 Estrellas</option>
+								<option value="4">4 Estrellas</option>
+								<option value="5">5 Estrellas</option>
+							</select>
+
+							<textarea ng-model="reviewCtrl.review.body"></textarea>
+
+							<label>Por:</label>
+							<input ng-model="reviewCtrl.review.author" type="email" />
+
+							<input type="submit" value="Enviar" />
+						</form>
+					</div><!-- Fin div Opiniones -->
+				</section>			
+				<button class="btn btn-primary" ng-show="product.canPurchase">Añadir al carro</button>
+			</div>						
+		</div>
+	</div>
+</body>
+</html>
