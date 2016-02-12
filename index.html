@@ -51,10 +51,8 @@
 								<b>Estrellas:{{ review.stars }}</b>
 								{{ review.body }}<br/>
 								-{{ review.author }}
-							</blockquote>
-							
+							</blockquote>	
 						</div>
-
 						<!-- Formulario de Opiniones -->
 						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
 						 ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
@@ -96,7 +94,6 @@
 						 		<tr>
 						 			<td class="col-xs-4">
 						 				<input type="submit" value="Enviar" class="pull-right btn btn-primary"/>
-										<div>Formulario válido: {{reviewForm.$valid}}</div>
 						 			</td>
 						 		</tr>
 						 	</table>
@@ -104,8 +101,8 @@
 					</div><!-- Fin div Opiniones -->
 				</section>			
 				<button class="btn btn-primary" ng-show="product.canPurchase">Añadir al carro</button>
-			</div>						
-		</div>
-	</div>
+			</div><!-- Fin repeat product -->						
+		</div><!-- Fin store -->
+	</div><!-- Fin container -->
 </body>
 </html>
