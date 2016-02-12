@@ -34,7 +34,6 @@
 							<a href ng-click="panel.selectTab(3)">Opiniones</a>
 						</li>
 					</ul>
-
 					<div class="panel" ng-show="panel.isSelected(1)">
 						<h4>Descripción</h4>
 						<blockquote>{{product.description}}</blockquote>
@@ -45,32 +44,62 @@
 					</div>
 					<div class="panel" ng-show="panel.isSelected(3)">
 						<h4>Opiniones</h4>
+						<!-- Mensaje en caso de no poseer opiniones -->
+						<blockquote ng-hide="product.reviews.length">Sin opiniones</blockquote>
 						<div ng-repeat="review in product.reviews">
-							<p>
+							<blockquote>
 								<b>Estrellas:{{ review.stars }}</b>
 								{{ review.body }}<br/>
 								-{{ review.author }}
-							</p>
+							</blockquote>
 							
 						</div>
 
 						<!-- Formulario de Opiniones -->
-						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
-
-							<select ng-model="reviewCtrl.review.stars">
-								<option value="1">1 Estrella</option>
-								<option value="2">2 Estrellas</option>
-								<option value="3">3 Estrellas</option>
-								<option value="4">4 Estrellas</option>
-								<option value="5">5 Estrellas</option>
-							</select>
-
-							<textarea ng-model="reviewCtrl.review.body"></textarea>
-
-							<label>Por:</label>
-							<input ng-model="reviewCtrl.review.author" type="email" />
-
-							<input type="submit" value="Enviar" />
+						<form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+						 ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+						 	<table>
+						 		<tr>
+						 			<!-- Cantidad de estrellas -->
+						 			<td class="col-xs-4">
+										<fieldset class="form-group">
+											<label for="reviewStars">Estrellas</label>
+											<select ng-model="reviewCtrl.review.stars" class="form-control" id="reviewStars" required>
+												<option value="1" selected="selected">1 Estrella</option>
+												<option value="2">2 Estrellas</option>
+												<option value="3">3 Estrellas</option>
+												<option value="4">4 Estrellas</option>
+												<option value="5">5 Estrellas</option>
+											</select>
+										</fieldset>
+						 			</td>
+						 		</tr>
+						 		<tr>
+						 			<!-- Comentario -->
+						 			<td class="col-xs-4">
+										<fieldset class="form-group">
+											<label for="reviewBody"></label>
+											<textarea ng-model="reviewCtrl.review.body" class="form-control" id="reviewBody" required></textarea>
+										</fieldset>
+										
+						 			</td>
+						 		</tr>
+						 		<tr>
+						 			<!-- Autor -->
+						 			<td class="col-xs-4">
+										<fieldset class="form-group">
+											<label for="reviewAuthor">Por</label>
+											<input ng-model="reviewCtrl.review.author" type="email" class="form-control" required/>
+										</fieldset>
+						 			</td>
+						 		</tr>
+						 		<tr>
+						 			<td class="col-xs-4">
+						 				<input type="submit" value="Enviar" class="pull-right btn btn-primary"/>
+										<div>Formulario válido: {{reviewForm.$valid}}</div>
+						 			</td>
+						 		</tr>
+						 	</table>
 						</form>
 					</div><!-- Fin div Opiniones -->
 				</section>			
