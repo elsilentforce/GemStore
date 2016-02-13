@@ -1,0 +1,50 @@
+<h4>Opiniones</h4>
+<!-- Mensaje en caso de no poseer opiniones -->
+<blockquote ng-hide="product.reviews.length">Sin opiniones</blockquote>
+<div ng-repeat="review in product.reviews">
+	<blockquote>
+		<b>Estrellas:{{ review.stars }}</b>
+		{{ review.body }}<br/>
+		<cite class="clearfix">-{{ review.author }}</cite>
+	</blockquote>	
+</div>
+<!-- Formulario de Opiniones -->
+<form name="reviewForm" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+<table>
+	<tr>
+		<!-- Cantidad de estrellas -->
+		<td class="col-xs-4">
+			<fieldset class="form-group">
+				<label for="reviewStars">Estrellas</label>
+				<select ng-model="reviewCtrl.review.stars" class="form-control" id="reviewStars" ng-options="stars for stars in [5,4,3,2,1]" required>
+					<option value="">Evalúe el producto</option>
+				</select>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<!-- Comentario -->
+		<td class="col-xs-4">
+			<fieldset class="form-group">
+				<label for="reviewBody">Comentario</label>
+				<textarea ng-model="reviewCtrl.review.body" class="form-control" id="reviewBody" placeholder="Comentario del producto" required></textarea>
+			</fieldset>
+
+		</td>
+	</tr>
+	<tr>
+		<!-- Autor -->
+		<td class="col-xs-4">
+			<fieldset class="form-group">
+				<label for="reviewAuthor">Por</label>
+				<input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="mail@domain.com" required/>
+			</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td class="col-xs-4">
+			<input type="submit" value="Enviar" class="pull-right btn btn-primary"/>
+		</td>
+	</tr>
+</table>
+</form>
