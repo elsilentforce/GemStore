@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="store">
 <head>
-	<title>Probando el desarrollo con Angular</title>
+	<title>Gemstore AngularJS</title>
 	<meta charset='utf-8'>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/customStyle.css">
@@ -12,7 +12,7 @@
 </head>
 <body ng-controller="StoreController as store">
 	<div class="container">
-		<h1>Gemas en Venta</h1>
+		<h1 class="text-center">Gemas en Venta</h1>
 		<div class="list-group-item" ng-repeat="product in store.products">
 			<!-- Título -->
 			<h2 product-title></h2>

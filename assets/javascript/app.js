@@ -1,41 +1,10 @@
 (function(){
 	var app = angular.module('store', []);
 
-
 	app.controller('StoreController', function(){
 		this.products = gems;
 	});
-
-	app.controller('PanelController', function(){
-		this.tab = 1;
-
-		this.selectTab = function(setTab){
-			this.tab = setTab;
-		};
-
-		this.isSelected = function(checkTab){
-			return this.tab === checkTab;
-		};
-	});
 	
-	app.controller('GalleryController', function(){
-		this.image = 0;
-		this.counter = 0;
-
-		this.setImage = function(setImage){
-			this.image = setImage;
-		};
-
-	});
-
-	app.controller('ReviewController',function(){
-		this.review = {};
-
-		this.addReview = function(product){
-			product.reviews.push(this.review);
-			this.review = {};
-		};
-	});
 
 	//Directiva tipo atributo para título
 	app.directive('productTitle', function(){
@@ -81,6 +50,21 @@
 		}
 	});
 
+	//Directiva tipo elemento para galería
+	app.directive('productGallery', function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'views/index/product-gallery.html',
+			controller: function(){
+				this.current = 0;
+				this.setCurrent = function(imageNumber){
+					this.current = imageNumber || 0;
+				};
+			},
+			controllerAs: 'gallery'
+		}
+	});
+
 	//Directiva tipo elemento para opiniones
 	app.directive('productReview',function(){
 		return{
@@ -103,7 +87,7 @@
 	var gems = [
 		{
 			name: 'Amatista',
-			price: 3.00,
+			price: 15.65,
 			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut facilisis neque, vel cursus urna. Vestibulum dignissim mi sem, vel vulputate purus suscipit vel. Nullam quis risus mattis, vestibulum tortor a, euismod nisi. Curabitur vel magna sapien. Aliquam eu sem pretium, rhoncus tortor id, congue felis.',
 			canPurchase: true,
 			soldOut: false,
@@ -115,11 +99,14 @@
 			reviews: [
 				{stars: 3, body: "Muy linda gema, recomendada", author: "mail@gmail.com"},
 				{stars: 4, body: "Me encantó! excelente atención en la tienda", author: "rosa@testuser.com"},
+			],
+			specs:[
+				{shine: '4/10'},
 			]
 		},
 		{
 			name: 'Onix',
-			price: 3.50,
+			price: 13.20,
 			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut facilisis neque, vel cursus urna. Vestibulum dignissim mi sem, vel vulputate purus suscipit vel. Nullam quis risus mattis, vestibulum tortor a, euismod nisi. Curabitur vel magna sapien. Aliquam eu sem pretium, rhoncus tortor id, congue felis.',
 			canPurchase: false,
 			soldOut: true,
@@ -129,6 +116,22 @@
 				'assets/img/gem-06.gif',
 			],
 			reviews: []
+		},
+		{
+			name: 'Jade',
+			price: 10.80,
+			description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut facilisis neque, vel cursus urna. Vestibulum dignissim mi sem, vel vulputate purus suscipit vel. Nullam quis risus mattis, vestibulum tortor a, euismod nisi. Curabitur vel magna sapien. Aliquam eu sem pretium, rhoncus tortor id, congue felis.',
+			canPurchase: false,
+			soldOut: true,
+			images: [
+				'assets/img/gem-07.gif',
+				'assets/img/gem-06.gif',
+				'assets/img/gem-09.gif',
+			],
+			reviews: [],
+			specs:[
+				{shine: '6/10'},
+			]
 		}
 	];
 })();

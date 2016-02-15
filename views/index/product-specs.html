@@ -1,2 +1,3 @@
 <h4>Especificaciones</h4>
-<blockquote>Sin especificaciones</blockquote>
+<blockquote ng-hide="product.specs.length">Sin especificaciones</blockquote>
+<blockquote ng-show="product.specs.length">Brillo: 	{{ product.specs[0].shine }}</blockquote>
