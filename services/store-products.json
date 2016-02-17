@@ -1,0 +1,21 @@
+[
+	{
+		name: "Amatista",
+		price: 15.65,
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut facilisis neque, vel cursus urna. Vestibulum dignissim mi sem, vel vulputate purus suscipit vel. Nullam quis risus mattis, vestibulum tortor a, euismod nisi. Curabitur vel magna sapien. Aliquam eu sem pretium, rhoncus tortor id, congue felis.",
+		canPurchase: true,
+		soldOut: false,
+		images: [
+			"assets/img/gem-01.gif",
+			"assets/img/gem-02.gif",
+			"assets/img/gem-03.gif",
+		],
+		reviews: [
+			{stars: 3, body: "Muy linda gema, recomendada", author: "mail@gmail.com"},
+			{stars: 4, body: "Me encantó! excelente atención en la tienda", author: "rosa@testuser.com"},
+		],
+		specs:[
+			{shine: "4/10"},
+		]
+	}
+]
